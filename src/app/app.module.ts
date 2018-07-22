@@ -4,24 +4,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
-import { SetTokenComponent } from './components/set-token/set-token.component';
-import { HomeComponent } from './components/home/home.component';
-import {AuthenticationGuard} from './autentication.guard';
+import {TrelloModule} from './trello/trello.module';
+import {AuthenticationService} from './trello/authentication.service';
+import { PublicComponent } from './public/public.component';
+import { PrivateComponent } from './private/private.component';
+import {PublicGuard} from './public/public.guard';
+import {PrivateGuard} from './private/private.guard';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SetTokenComponent,
-    HomeComponent
+    PublicComponent,
+    PrivateComponent
   ],
   imports: [
     BrowserModule,
       HttpClientModule,
-      AppRoutingModule
+      AppRoutingModule,
+      TrelloModule
   ],
-  providers: [AuthenticationGuard],
+  providers: [AuthenticationService, PublicGuard, PrivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

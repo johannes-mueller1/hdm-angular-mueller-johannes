@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthorizeService} from '../../services/authorize.service';
-import { Router } from '@angular/router';
+import {AuthenticationService} from '../authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-set-token',
@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class SetTokenComponent implements OnInit {
 
-  constructor(private auth: AuthorizeService, private router: Router) { }
+  constructor(private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
       const hash = window.location.hash;
       const token = hash.split('=')[1];
-      this.auth.setToken(token);
+      this.authService.setToken(token);
       this.router.navigate(['/']);
   }
 
