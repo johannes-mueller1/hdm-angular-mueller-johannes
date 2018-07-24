@@ -6,7 +6,7 @@ import {Local_Storage_Key} from './local-storage-key';
 })
 export class AuthenticationService {
     public token: string;
-    key = 'f6ae844248148c53f5b980de497b9921';
+    public key = 'f6ae844248148c53f5b980de497b9921';
 
   constructor() {
     this.token = localStorage.getItem(Local_Storage_Key);
@@ -29,5 +29,9 @@ export class AuthenticationService {
 
     getToken(): string | undefined {
         return localStorage.getItem(Local_Storage_Key);
+    }
+
+    deleteToken() {
+      localStorage.removeItem(Local_Storage_Key);
     }
 }

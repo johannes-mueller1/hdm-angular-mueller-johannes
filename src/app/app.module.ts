@@ -25,7 +25,7 @@ import {PrivateGuard} from './private/private.guard';
       AppRoutingModule,
       TrelloModule
   ],
-  providers: [AuthenticationService, PublicGuard, PrivateGuard],
+  providers: [PublicGuard, PrivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
