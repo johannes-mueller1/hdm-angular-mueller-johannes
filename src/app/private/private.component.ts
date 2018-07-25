@@ -17,8 +17,4 @@ export class PrivateComponent implements OnInit {
     console.log('private');
   }
 
-    logout() {
-        this.authService.deleteToken();
-        this.router.navigate(['/']);
-    }
 }

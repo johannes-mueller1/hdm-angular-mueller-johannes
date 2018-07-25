@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
     token: string;
     constructor(private authService: AuthenticationService) {}
 
-    title = 'Angular App - Johannes Müller';
+
 
 
 

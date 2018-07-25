@@ -5,9 +5,10 @@ import {PrivateGuard} from './private/private.guard';
 import {PublicGuard} from './public/public.guard';
 import {PrivateComponent} from './private/private.component';
 import {PublicComponent} from './public/public.component';
+import {PRIVATE_ROUTES} from './private/private.routes';
 
 const routes: Routes = [
-    {path: 'private', canActivate: [PrivateGuard], component: PrivateComponent},
+    {path: 'private', canActivate: [PrivateGuard], component: PrivateComponent, children: PRIVATE_ROUTES},
     {path: '', canActivate: [PublicGuard], component: PublicComponent}
     ];
 

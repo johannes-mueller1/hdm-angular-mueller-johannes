@@ -12,9 +12,10 @@ export class PublicComponent implements OnInit {
 
   ngOnInit() {
     console.log('public');
+    this.login();
   }
 
-    infect() {
+    login() {
         this.authService.login();
     }
 

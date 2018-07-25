@@ -10,6 +10,8 @@ import { PublicComponent } from './public/public.component';
 import { PrivateComponent } from './private/private.component';
 import {PublicGuard} from './public/public.guard';
 import {PrivateGuard} from './private/private.guard';
+import { HeaderComponent } from './private/header/header.component';
+import { BoardsListComponent } from './private/boards-list/boards-list.component';
 
 
 
@@ -17,7 +19,9 @@ import {PrivateGuard} from './private/private.guard';
   declarations: [
     AppComponent,
     PublicComponent,
-    PrivateComponent
+    PrivateComponent,
+    HeaderComponent,
+    BoardsListComponent
   ],
   imports: [
     BrowserModule,

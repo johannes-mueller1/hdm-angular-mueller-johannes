@@ -1,9 +1,10 @@
-<p>
-  Herzlich Willkommen im privaten Bereich. Hier können Sie Ihre Trello Boards analysieren.
-</p>
-<button (click)="logout()">Logout</button>
+<app-header></app-header>
+<div class="container-fluid" style="margin-top:80px">
+
+<router-outlet></router-outlet>
 
 <hr>
 <div *ngIf="token">
   {{token}}
+</div>
 </div>
