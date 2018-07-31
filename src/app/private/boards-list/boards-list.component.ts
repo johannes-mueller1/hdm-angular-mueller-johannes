@@ -13,6 +13,10 @@ export class BoardsListComponent implements OnInit {
   constructor(private api: TrelloApiService) { }
 
   ngOnInit() {
+      this.getBoards();
+  }
+
+  getBoards() {
       this.api.getBoards().subscribe((result: Array<BoardInterface>) => {
               console.log('success', result);
               this.boards = result;

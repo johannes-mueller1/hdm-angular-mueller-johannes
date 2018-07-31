@@ -20,7 +20,7 @@ export class TrelloInterceptor implements HttpInterceptor {
         }
         req = req.clone({
             setParams: {
-                token: this.authService.token,
+                token: this.authService.getToken(),
                 key: this.authService.key,
             }
         });

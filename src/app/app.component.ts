@@ -9,14 +9,8 @@ import {AuthenticationService} from './trello/authentication.service';
 })
 export class AppComponent implements OnInit {
     token: string;
-    constructor(private authService: AuthenticationService) {}
-
-
-
-
-
+    constructor() {}
 
     ngOnInit(): void {
-        this.token = this.authService.getToken();
     }
 }
