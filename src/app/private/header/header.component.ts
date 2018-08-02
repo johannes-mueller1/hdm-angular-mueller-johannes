@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MeInterface} from '../../trello/Interfaces/me.interface';
+import {Trello} from '../../trello/Interfaces/trello.interface';
 import {TrelloApiService} from '../../trello/trello-api.service';
 import {AuthenticationService} from '../../trello/authentication.service';
 import {Router} from '@angular/router';
+import User = Trello.User;
 
 @Component({
   selector: 'app-header',
@@ -10,12 +11,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  me: MeInterface;
+  me: User;
   title = 'Angular App';
   constructor(private api: TrelloApiService, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    this.api.getMe().subscribe((data: MeInterface) => this.me = { ...data });
+    this.api.getMe().subscribe((data: User) => this.me = { ...data });
   }
 
     logout() {

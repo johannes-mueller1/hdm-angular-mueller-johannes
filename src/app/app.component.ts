@@ -8,7 +8,6 @@ import {AuthenticationService} from './trello/authentication.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    token: string;
     constructor() {}
 
     ngOnInit(): void {

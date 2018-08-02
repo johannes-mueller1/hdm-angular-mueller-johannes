@@ -6,11 +6,11 @@
 
   <div class="collapse navbar-collapse" id="navbarsExample04">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link"  [routerLink]="['boards']">Boards<span class="sr-only">(current)</span></a>
+      <li class="nav-item" routerLinkActive="active" >
+        <a class="nav-link" [routerLink]="['boards']">Boards</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Activity List</a>
+      <li class="nav-item" >
+        <a class="nav-link" routerLinkActive="active">Activity List</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-md-0" *ngIf="me">

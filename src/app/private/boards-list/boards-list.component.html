@@ -1,4 +1,47 @@
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let board of boards">{{board.name}}</li>
-</ul>
+
+<!--<div class="row">-->
+  <!--<div class="col-sm-12">-->
+    <!--<ul class="list-group">-->
+      <!--<li class="list-group-item" *ngFor="let board of boards" (click)="onClick(board)"><a> {{board.name}} </a></li>-->
+      <!--&lt;!&ndash;<li class="list-group-item" *ngFor="let board of boards" (click)="onClick(board)" routerLinkActive="active">{{board.name}}</li>&ndash;&gt;-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div *ngFor="let board of boards" class="input-group mb-3">
+      <input type="text" class="form-control" value="{{board.name}}" aria-label="Recipient's username" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button (click)="onClick(board)" class="btn btn-outline-secondary" type="button">Show Board</button>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Create a new Board" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    </div>
+  </div>
+</div>
+
+
+
+&nbsp;
+&nbsp;
+
+<div class="row">
+  <div class="col-sm-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="board-name">Board name:</label>&nbsp;&nbsp;&nbsp;
+        <input #board_name (keyup.enter)="addBoard(board_name.value)" class="form-control" type="text"  id="board-name">&nbsp;&nbsp;&nbsp;
+      </div>
+      <button type="submit" (click)="addBoard(board_name.value)" class="btn btn-default">Create</button>
+    </form>
+  </div>
+</div>
+
+<!--<div class="form-group">-->
+  <!--<label for="board-name">Create new Board:</label>-->
+  <!--<input #board_name (keyup.enter)="addBoard(board_name.value)" type="text" class="form-control" id="board-name">-->
+<!--</div>-->
 

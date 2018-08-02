@@ -12,6 +12,9 @@ import {PublicGuard} from './public/public.guard';
 import {PrivateGuard} from './private/private.guard';
 import { HeaderComponent } from './private/header/header.component';
 import { BoardsListComponent } from './private/boards-list/boards-list.component';
+import { BoardItemComponent } from './private/boards-list/board-item/board-item.component';
+import {DataService} from './private/data.service';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -21,15 +24,17 @@ import { BoardsListComponent } from './private/boards-list/boards-list.component
     PublicComponent,
     PrivateComponent,
     HeaderComponent,
-    BoardsListComponent
+    BoardsListComponent,
+    BoardItemComponent
   ],
   imports: [
     BrowserModule,
       HttpClientModule,
       AppRoutingModule,
-      TrelloModule
+      TrelloModule,
+      FormsModule
   ],
-  providers: [PublicGuard, PrivateGuard],
+  providers: [PublicGuard, PrivateGuard, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

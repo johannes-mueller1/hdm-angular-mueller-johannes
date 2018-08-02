@@ -17,7 +17,7 @@ export class AuthenticationService {
     }
 
     getTokenRequestUrl(): string {
-        const returnUrl = encodeURI(window.location.href + '/set-trello-token');
+        const returnUrl = encodeURI(window.location.href + 'set-trello-token');
         return 'https://trello.com/1/authorize?response_type=token&key=' + this.key +
         '&return_url=' + returnUrl +
         '&callback_method=fragment&scope=read&expiration=never&name=Angular-JM097';
