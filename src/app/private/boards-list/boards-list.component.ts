@@ -5,6 +5,8 @@ import {DataService} from '../data.service';
 import {Trello} from '../../trello/Interfaces/trello.interface';
 import Board = Trello.Board;
 
+
+
 @Component({
   selector: 'app-boards-list',
   templateUrl: './boards-list.component.html',
@@ -12,6 +14,8 @@ import Board = Trello.Board;
 })
 export class BoardsListComponent implements OnInit {
    public boards: Array<Board>;
+    newBoardName: string;
+
 
   constructor(private api: TrelloApiService, private router: Router, private data: DataService) { }
 
@@ -35,7 +39,30 @@ export class BoardsListComponent implements OnInit {
       this.router.navigate(['private', 'boards', board.name], {queryParams: {'board-id': board.id}});
   }
 
-    addBoard(board_name: string) {
-        console.log('Add Boardname: ' + board_name);
+
+    onSave(name: string) {
+       for (const i of this.boards) {
+           this.api.updateBoard(i).subscribe(board => {
+              console.log('succesfull updated :' +  board.name);
+              console.log(board);
+           });
+       }
+       if (name) {
+           const newBoard: Board = { name } as Board;
+           this.newBoardName = null;
+           this.api.addBoard(newBoard)
+               .subscribe(board => {
+                   this.boards.push(board);
+                   this.boards = this.boards.sort((n1, n2) => {
+                       if (n1.name > n2.name) {
+                           return 1;
+                       }
+                       if (n1.name < n2.name) {
+                           return -1;
+                       }
+                       return 0;
+                   });
+               });
+       }
     }
 }

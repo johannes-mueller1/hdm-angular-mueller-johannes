@@ -15,6 +15,8 @@ import { BoardsListComponent } from './private/boards-list/boards-list.component
 import { BoardItemComponent } from './private/boards-list/board-item/board-item.component';
 import {DataService} from './private/data.service';
 import {FormsModule} from '@angular/forms';
+import { MessagesComponent } from './private/messages/messages.component';
+import {MessageService} from './private/message.service';
 
 
 
@@ -25,7 +27,8 @@ import {FormsModule} from '@angular/forms';
     PrivateComponent,
     HeaderComponent,
     BoardsListComponent,
-    BoardItemComponent
+    BoardItemComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import {FormsModule} from '@angular/forms';
       TrelloModule,
       FormsModule
   ],
-  providers: [PublicGuard, PrivateGuard, DataService],
+  providers: [PublicGuard, PrivateGuard, DataService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

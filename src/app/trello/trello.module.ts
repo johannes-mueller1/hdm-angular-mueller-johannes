@@ -6,6 +6,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TrelloInterceptor} from './http-interceptors/trello-interceptor';
 import {AuthenticationService} from './authentication.service';
 import {TrelloApiService} from './trello-api.service';
+import {HttpErrorHandler} from './http-error-handler.service';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {TrelloApiService} from './trello-api.service';
   ],
   declarations: [SetTokenComponent],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: TrelloInterceptor, multi: true},
-        AuthenticationService, TrelloApiService
-    ]
+        AuthenticationService, TrelloApiService, HttpErrorHandler
+    ],
 })
 export class TrelloModule { }
