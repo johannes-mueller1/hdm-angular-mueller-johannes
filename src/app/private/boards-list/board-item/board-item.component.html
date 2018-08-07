@@ -1,8 +1,31 @@
-<p>
-  {{this.board?.name}}
-</p>
-<ul>
-  <li *ngFor="let list of lists">
-  {{list.name}}
-  </li>
-</ul>
+<div class="row">
+  <div class="col-sm-12">
+    <h3>
+      Details of Board: {{this.board?.name}}
+    </h3>
+    <hr>
+    <br>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <h4>
+      Description
+    </h4>
+    <input #desc [ngModel]="board?.desc" placeholder="Type in a description! " type="text" (keyup.enter)="onSaveDescription(desc.value)" (blur)="onSaveDescription(desc.value)"  class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <br>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <h4>
+      Lists
+    </h4>
+    <div *ngFor="let list of lists" class="input-group mb-3">
+      <input type="text" class="form-control" [(ngModel)]="list.name" (keyup.enter)="onSaveList(list)" (blur)="onSaveList(list)" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    </div>
+  </div>
+</div>
+

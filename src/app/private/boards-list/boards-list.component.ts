@@ -40,14 +40,33 @@ export class BoardsListComponent implements OnInit {
   }
 
 
-    onSave(name: string) {
-       for (const i of this.boards) {
-           this.api.updateBoard(i).subscribe(board => {
-              console.log('succesfull updated :' +  board.name);
-              console.log(board);
-           });
-       }
-       if (name) {
+    // onSave(name: string) {
+    //    for (const i of this.boards) {
+    //        this.api.updateBoard(i).subscribe(board => {
+    //           console.log('succesfull updated :' +  board.name);
+    //           console.log(board);
+    //        });
+    //    }
+    //    if (name) {
+    //        const newBoard: Board = { name } as Board;
+    //        this.newBoardName = null;
+    //        this.api.addBoard(newBoard)
+    //            .subscribe(board => {
+    //                this.boards.push(board);
+    //                this.boards = this.boards.sort((n1, n2) => {
+    //                    if (n1.name > n2.name) {
+    //                        return 1;
+    //                    }
+    //                    if (n1.name < n2.name) {
+    //                        return -1;
+    //                    }
+    //                    return 0;
+    //                });
+    //            });
+    //    }
+    // }
+
+    onCreate(name: string) {
            const newBoard: Board = { name } as Board;
            this.newBoardName = null;
            this.api.addBoard(newBoard)
@@ -63,6 +82,12 @@ export class BoardsListComponent implements OnInit {
                        return 0;
                    });
                });
-       }
+    }
+
+    onEnterAndBlur(methodBoard: Board) {
+           this.api.updateBoard(methodBoard).subscribe(board => {
+              console.log('succesfull updated :' +  board.name);
+              console.log(board);
+           });
     }
 }

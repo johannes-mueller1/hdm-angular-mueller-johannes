@@ -11,6 +11,9 @@ export class MessageService {
     clear() {
         this.messages = [];
     }
+    clearSpecific(id: number) {
+        this.messages.splice(id, 1);
+    }
 }
 
 

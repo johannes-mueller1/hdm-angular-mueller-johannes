@@ -17,6 +17,8 @@ import {DataService} from './private/data.service';
 import {FormsModule} from '@angular/forms';
 import { MessagesComponent } from './private/messages/messages.component';
 import {MessageService} from './private/message.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -35,7 +37,8 @@ import {MessageService} from './private/message.service';
       HttpClientModule,
       AppRoutingModule,
       TrelloModule,
-      FormsModule
+      FormsModule,
+      BrowserAnimationsModule
   ],
   providers: [PublicGuard, PrivateGuard, DataService, MessageService],
   bootstrap: [AppComponent]

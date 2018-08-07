@@ -6,5 +6,5 @@ import {BoardItemComponent} from './boards-list/board-item/board-item.component'
 
 export const PRIVATE_ROUTES: Routes = [
     { path: 'boards/:board', component: BoardItemComponent},
-    { path: 'boards', component: BoardsListComponent }
+    { path: 'boards', component: BoardsListComponent}
 ];

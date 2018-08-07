@@ -52,11 +52,27 @@ export class TrelloApiService {
             );
     }
 
+    /** PUT: update the board on the server. Returns the updated board upon success. */
+    updateList (list: List): Observable<List> {
+        return this.http.put<List>('https://api.trello.com/1/lists/' + list.id, list)
+            .pipe(
+                catchError(this.handleError('updateList', list))
+            );
+    }
+
     /** POST: add a new board to trello */
     addBoard (board: Board): Observable<Board> {
         return this.http.post<Board>('https://api.trello.com/1/boards/?name=' + board.name, board)
             .pipe(
                 catchError(this.handleError('addBoard', board))
+            );
+    }
+
+    /** POST: add a new board to trello */
+    addList (board: Board, list: List): Observable<List> {
+        return this.http.post<List>('https://api.trello.com/1/lists?name=' + list.name + '&idBoard=' + board.id, list)
+            .pipe(
+                catchError(this.handleError('addList', list))
             );
     }
 
