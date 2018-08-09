@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs/internal/Subscription';
 import {DataService} from '../../data.service';
 import {TrelloApiService} from '../../../trello/trello-api.service';
@@ -18,8 +18,11 @@ export class BoardItemComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   board: Board;
   lists: Array<List>;
+  onEnter: Boolean = false;
+  newListName: String;
 
-  constructor( private activatedRoute: ActivatedRoute, private trelloapi: TrelloApiService, private message: MessageService) { }
+  constructor( private activatedRoute: ActivatedRoute, private trelloapi: TrelloApiService, private message: MessageService, private router: Router, private data: DataService) {
+  }
 
     ngOnInit(): void {
          // this.subscription = this.activatedRoute.params.subscribe(
@@ -33,6 +36,10 @@ export class BoardItemComponent implements OnInit, OnDestroy {
             },
                     (error: any) => console.log('error', error)
         );
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     getBoard(board_id: string) {
@@ -60,9 +67,7 @@ export class BoardItemComponent implements OnInit, OnDestroy {
         );
     }
 
-    ngOnDestroy(): void {
-      this.subscription.unsubscribe();
-    }
+
 
     onSaveDescription(boarddescription: string) {
       this.board.desc = boarddescription;
@@ -73,7 +78,8 @@ export class BoardItemComponent implements OnInit, OnDestroy {
       );
     }
 
-    onSaveList(locallist: List) {
+    onSaveListEnter(locallist: List) {
+                  this.onEnter = true;
                   this.trelloapi.updateList(locallist).subscribe(
                       returnlist => {
                           console.log('Successful updated Trellolist: ' + returnlist.name);
@@ -81,4 +87,39 @@ export class BoardItemComponent implements OnInit, OnDestroy {
                   );
           }
 
+    onSaveListLeave(locallist: List) {
+      if (this.onEnter === false) {
+          this.trelloapi.updateList(locallist).subscribe(
+              returnlist => {
+                  console.log('Successful updated Trellolist: ' + returnlist.name);
+              }
+          );
+      } else {
+          this.onEnter = false;
+      }
+    }
+
+    onCreate(name: string) {
+        const newList: List = { name } as List;
+        this.newListName = null;
+        this.trelloapi.addList(this.board, newList)
+            .subscribe(list => {
+                this.lists.push(list);
+                this.lists = this.lists.sort((n1, n2) => {
+                    if (n1.name > n2.name) {
+                        return -1;
+                    }
+                    if (n1.name < n2.name) {
+                        return 1;
+                    }
+                    return 0;
+                });
+            });
+    }
+
+    onDetails(list: List) {
+        console.log('List selected: ' + list.name);
+        this.data.listSelected = list;
+        this.router.navigate(['private', 'boards', this.board.name, list.name ], {queryParams: {'board-id': this.board.id, 'list-id': list.id}});
+    }
 }

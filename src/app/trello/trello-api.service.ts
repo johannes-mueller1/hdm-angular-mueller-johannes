@@ -7,6 +7,8 @@ import List = Trello.List;
 import {Observable} from 'rxjs/internal/Observable';
 import {catchError} from 'rxjs/operators';
 import {HandleError, HttpErrorHandler} from './http-error-handler.service';
+import Card = Trello.Card;
+import Action = Trello.Action;
 
 @Injectable()
 export class TrelloApiService {
@@ -37,10 +39,38 @@ export class TrelloApiService {
             );
     }
 
+    getCards(list_id: string) {
+        return this.http.get<Array<Card>>('https://api.trello.com/1/lists/' + list_id + '/cards')
+            .pipe(
+                catchError(this.handleError('getCards'))
+            );
+    }
+
+    getActions(board: Board) {
+        return this.http.get<Array<Action>>('https://api.trello.com/1/boards/' + board.id + '/actions')
+            .pipe(
+                catchError(this.handleError('getActions'))
+            );
+    }
+
     getBoard(board_id: string) {
         return this.http.get<Board>('https://api.trello.com/1/boards/' + board_id)
             .pipe(
                 catchError(this.handleError('getBoard'))
+            );
+    }
+
+    getList(list_id: string) {
+        return this.http.get<List>('https://api.trello.com/1/lists/' + list_id)
+            .pipe(
+                catchError(this.handleError('getList'))
+            );
+    }
+
+    getCard(card_id: string) {
+        return this.http.get<Card>('https://api.trello.com/1/cards/' + card_id)
+            .pipe(
+                catchError(this.handleError('getCard'))
             );
     }
 
@@ -52,11 +82,19 @@ export class TrelloApiService {
             );
     }
 
-    /** PUT: update the board on the server. Returns the updated board upon success. */
+    /** PUT: update the list on the server. Returns the updated board upon success. */
     updateList (list: List): Observable<List> {
         return this.http.put<List>('https://api.trello.com/1/lists/' + list.id, list)
             .pipe(
                 catchError(this.handleError('updateList', list))
+            );
+    }
+
+    /** PUT: update the card on the server. Returns the updated board upon success. */
+    updateCard (card: Card): Observable<Card> {
+        return this.http.put<Card>('https://api.trello.com/1/cards/' + card.id, card)
+            .pipe(
+                catchError(this.handleError('updateCard', card))
             );
     }
 
@@ -76,4 +114,28 @@ export class TrelloApiService {
             );
     }
 
+    addCard(list: List, newCard: Card): Observable<Card> {
+        return this.http.post<Card>('https://api.trello.com/1/cards?idList=' + list.id, newCard)
+            .pipe(
+                catchError(this.handleError('addCard', newCard))
+            );
+    }
+
+    /** DELETE: delete the board from the server */
+    deleteBoard (id: string): Observable<{}> {
+        const url = 'https://api.trello.com/1/boards/' + id;
+        return this.http.delete(url)
+            .pipe(
+                catchError(this.handleError('deleteBoard'))
+            );
+    }
+
+    /** DELETE: delete the card from the server */
+    deleteCard (id: string): Observable<{}> {
+        const url = 'https://api.trello.com/1/cards/' + id;
+        return this.http.delete(url)
+            .pipe(
+                catchError(this.handleError('deleteCard'))
+            );
+    }
 }

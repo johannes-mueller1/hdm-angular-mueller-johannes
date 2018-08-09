@@ -4,9 +4,9 @@
       Details of Board: {{this.board?.name}}
     </h3>
     <hr>
-    <br>
   </div>
 </div>
+
 <div class="row">
   <div class="col-sm-12">
     <h4>
@@ -17,15 +17,36 @@
   </div>
 </div>
 
-
 <div class="row">
   <div class="col-sm-12">
     <h4>
       Lists
     </h4>
-    <div *ngFor="let list of lists" class="input-group mb-3">
-      <input type="text" class="form-control" [(ngModel)]="list.name" (keyup.enter)="onSaveList(list)" (blur)="onSaveList(list)" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div *ngFor="let list of lists"  class="input-group mb-3">
+      <input type="text" class="form-control" [(ngModel)]="list.name" (keyup.enter)="onSaveListEnter(list)" (blur)="onSaveListLeave(list)" aria-label="Text input with dropdown button">
+      <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="onDetails(list)">Details</button>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="input-group mb-3">
+      <input #newList type="text" class="form-control" [(ngModel)]="newListName" placeholder="Create a new List" aria-label="Recipient's username" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button (click)="onCreate(newList.value)" class="btn btn-primary" type="button">Create</button>
+      </div>
+      <!--&nbsp;&nbsp; &nbsp; &nbsp;  <button (click)="onCreate(newBoard.value)"  type="submit" class="btn btn-default">Create</button>-->
+    </div>
+  </div>
+</div>
+
 

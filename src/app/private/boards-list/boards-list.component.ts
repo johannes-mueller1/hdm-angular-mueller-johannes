@@ -15,28 +15,26 @@ import Board = Trello.Board;
 export class BoardsListComponent implements OnInit {
    public boards: Array<Board>;
     newBoardName: string;
+    onEnter: Boolean = false;
 
 
   constructor(private api: TrelloApiService, private router: Router, private data: DataService) { }
 
   ngOnInit() {
-      this.getBoards();
+       this.getBoards();
   }
 
   getBoards() {
       this.api.getBoards().subscribe((result: Array<Board>) => {
               console.log('success', result);
               this.boards = result;
-          },
-          (error: any) => {
-              console.log('error', error);
-          }
-      );
+          });
   }
   onClick(board: Board) {
       console.log('Board selected: ' + board.name);
       this.data.boardSelected = board;
       this.router.navigate(['private', 'boards', board.name], {queryParams: {'board-id': board.id}});
+      console.log(this.router.routerState.snapshot.toString());
   }
 
 
@@ -84,10 +82,37 @@ export class BoardsListComponent implements OnInit {
                });
     }
 
-    onEnterAndBlur(methodBoard: Board) {
+    onEnterInput(methodBoard: Board) {
+      this.onEnter = true;
            this.api.updateBoard(methodBoard).subscribe(board => {
               console.log('succesfull updated :' +  board.name);
               console.log(board);
            });
+    }
+
+    onBlurInput(methodBoard: Board) {
+      if (this.onEnter === false) {
+          this.api.updateBoard(methodBoard).subscribe(board => {
+              console.log('succesfull updated :' + board.name);
+              console.log(board);
+          });
+      } else {
+          this.onEnter = false;
+      }
+    }
+
+    deleteBoard(board: Board) {
+        if (confirm('Are you sure to delete ' + board.name)) {
+            this.api.deleteBoard(board.id).subscribe();
+                let index: number;
+                for (const i in this.boards) {
+                    if (this.boards[i].id === board.id) {
+                        index = Number(i);
+                    }
+                }
+                console.log('DeleteBoardOperation, The index is: ' + index);
+                this.boards.splice(index, 1);
+        }
+
     }
 }

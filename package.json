@@ -23,9 +23,17 @@
     "@angular/platform-browser": "6.0.9",
     "@angular/platform-browser-dynamic": "6.0.9",
     "@angular/router": "6.0.9",
-    "chart.js": "^2.7.2",
+    "@types/chart.js": "^2.7.30",
+    "angular-bootstrap-md": "^6.2.1",
+    "angular5-csv": "^0.2.10",
+    "chart.js": "^2.5.0",
     "core-js": "^2.5.7",
+    "font-awesome": "^4.7.0",
+    "hammerjs": "^2.0.8",
+    "ngx-breadcrumbs": "0.0.3",
+    "node-sass": "^4.9.3",
     "rxjs": "^6.2.2",
+    "rxjs-compat": "^6.2.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

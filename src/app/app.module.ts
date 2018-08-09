@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -18,6 +18,10 @@ import {FormsModule} from '@angular/forms';
 import { MessagesComponent } from './private/messages/messages.component';
 import {MessageService} from './private/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListItemComponent } from './private/boards-list/board-item/list-item/list-item.component';
+import { ChartsComponent } from './private/charts/charts.component';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
+
 
 
 
@@ -30,7 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     BoardsListComponent,
     BoardItemComponent,
-    MessagesComponent
+    MessagesComponent,
+    ListItemComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,8 +44,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       AppRoutingModule,
       TrelloModule,
       FormsModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      MDBBootstrapModule.forRoot()
   ],
+    schemas: [NO_ERRORS_SCHEMA],
   providers: [PublicGuard, PrivateGuard, DataService, MessageService],
   bootstrap: [AppComponent]
 })

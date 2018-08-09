@@ -44,6 +44,10 @@ export namespace Trello {
     export interface Emoji {
     }
 
+    export interface Old {
+        due: Date;
+    }
+
     export interface BioData {
         emoji: Emoji;
     }
@@ -257,4 +261,113 @@ export namespace Trello {
         pos: number;
         subscribed: boolean;
     }
+
+    export interface Badges {
+        votes: number;
+        viewingMemberVoted: boolean;
+        subscribed: boolean;
+        fogbugz: string;
+        checkItems: number;
+        checkItemsChecked: number;
+        comments: number;
+        attachments: number;
+        description: boolean;
+        due?: any;
+        dueComplete: boolean;
+    }
+
+    export interface Label {
+        id: string;
+        idBoard: string;
+        name: string;
+        color: string;
+    }
+
+    export interface Card {
+        id: string;
+        badges: Badges;
+        checkItemStates: any[];
+        closed: boolean;
+        dueComplete: boolean;
+        dateLastActivity: Date;
+        desc: string;
+        descData?: any;
+        due?: any;
+        email?: any;
+        idBoard: string;
+        idChecklists: any[];
+        idList: string;
+        idMembers: string[];
+        idMembersVoted: any[];
+        idShort: number;
+        idAttachmentCover: string;
+        manualCoverAttachment: boolean;
+        labels: Label[];
+        idLabels: string[];
+        name: string;
+        pos: number;
+        shortLink: string;
+        shortUrl: string;
+        subscribed: boolean;
+        url: string;
+    }
+
+    export interface Data {
+        list: List;
+        board: Board;
+        card: Card;
+        old: Old;
+    }
+
+    export interface MemberCreator {
+        id: string;
+        avatarHash: string;
+        fullName: string;
+        initials: string;
+        username: string;
+    }
+
+    export interface MemberCreator2 {
+        type: string;
+        id: string;
+        username: string;
+        text: string;
+    }
+
+    export interface Card2 {
+        type: string;
+        due: Date;
+        id: string;
+        shortLink: string;
+        text: string;
+    }
+
+    export interface Date {
+        type: string;
+        date: Date;
+    }
+
+    export interface Entities {
+        card: Card2;
+        date: Date;
+        memberCreator: MemberCreator2;
+    }
+
+    export interface Display {
+        translationKey: string;
+        entities: Entities;
+    }
+
+    export interface Action {
+        id: string;
+        idMemberCreator: string;
+        data: Data;
+        type: string;
+        date: Date;
+        memberCreator: MemberCreator;
+        display: Display;
+    }
+
+
+
 }

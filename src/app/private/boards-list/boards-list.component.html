@@ -20,9 +20,13 @@
 <div class="row">
   <div class="col-sm-12">
     <div *ngFor="let board of boards" class="input-group mb-3">
-      <input type="text" class="form-control" [(ngModel)]="board.name" (keyup.enter)="onEnterAndBlur(board)" (blur)="onEnterAndBlur(board)" aria-label="Recipient's username" aria-describedby="basic-addon2">
+      <input type="text" class="form-control" [(ngModel)]="board.name" (keyup.enter)="onEnterInput(board)" (blur)="onBlurInput(board)"  aria-label="Text input with dropdown button">
       <div class="input-group-append">
-        <button (click)="onClick(board)" class="btn btn-outline-secondary" type="button">Details</button>
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+          <div class="dropdown-menu">
+              <button class="dropdown-item" (click)="onClick(board)">Details</button>
+              <button class="dropdown-item" (click)="deleteBoard(board)">Delete</button>
+          </div>
       </div>
     </div>
     <div class="input-group mb-3">

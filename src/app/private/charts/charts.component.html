@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-sm-12">
+<ul class="list-group">
+  <li *ngFor="let type of this.types" class="list-group-item">{{type}}</li>
+</ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div style="display: block">
+      <canvas mdbChart
+              [chartType]="chartType"
+              [datasets]="chartDatasets"
+              [labels]="chartLabels"
+              [colors]="chartColors"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+      </canvas>
+    </div>
+  </div>
+</div>
