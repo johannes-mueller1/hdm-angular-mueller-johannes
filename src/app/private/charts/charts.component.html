@@ -1,10 +1,14 @@
-<div class="row">
+<div class="form-group row">
   <div class="col-sm-12">
-<ul class="list-group">
-  <li *ngFor="let type of this.types" class="list-group-item">{{type}}</li>
-</ul>
+    <select #selectedValue (change)="this.getBoardActions(selectedValue.value)" class="form-control" id="exampleFormControlSelect1">
+      <option>Select a Board</option>
+      <option value="{{board.id}}" *ngFor="let board of this.boards">{{board.name}}</option>
+    </select>
   </div>
 </div>
+
+
+<div *ngIf="this.boardSelect && this.boardSelect != 'Select a Board'">
 
 <div class="row">
   <div class="col-sm-6">
@@ -21,4 +25,6 @@
       </canvas>
     </div>
   </div>
+</div>
+
 </div>
