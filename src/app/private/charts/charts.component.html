@@ -1,6 +1,6 @@
 <div class="form-group row">
   <div class="col-sm-12">
-    <select #selectedValue (change)="this.getBoardActions(selectedValue.value)" class="form-control" id="exampleFormControlSelect1">
+    <select #selectedValue (change)="this.onChange(selectedValue.value)" class="form-control" id="exampleFormControlSelect1">
       <option>Select a Board</option>
       <option value="{{board.id}}" *ngFor="let board of this.boards">{{board.name}}</option>
     </select>
@@ -8,23 +8,45 @@
 </div>
 
 
-<div *ngIf="this.boardSelect && this.boardSelect != 'Select a Board'">
+<br>
+
+
+<div *ngIf="(selectedValue.value !== 'Select a Board')">
+
+  <div class="row">
+    <hr>
+    <div class="col-sm-12">
+      <h4>Action count per user:</h4>
+    </div>
+  </div>
 
 <div class="row">
-  <div class="col-sm-6">
-    <div style="display: block">
-      <canvas mdbChart
-              [chartType]="chartType"
-              [datasets]="chartDatasets"
-              [labels]="chartLabels"
-              [colors]="chartColors"
-              [options]="chartOptions"
-              [legend]="true"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)">
-      </canvas>
-    </div>
+<div class="col-lg-5"></div>
+  <div class="col-lg-6">
+    <br>
+    <br>
+    <app-barchart [chartDatasets]="this.barChartDatasets"  [chartLabels]="this.boardUsers" ></app-barchart>
   </div>
 </div>
 
+  <br>
+  <br>
+  <br>
+
+  <div class="row">
+    <hr>
+    <div class="col-sm-12">
+      <h4>Action count per Actiontype:</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-5"></div>
+  <div class="col-lg-6">
+    <br>
+    <br>
+    <br>
+    <app-radarchart *ngIf="this.radarChartDatasets" [chartDatasets]="this.radarChartDatasets" [chartLabels]="this.types"></app-radarchart>
+  </div>
+  </div>
 </div>

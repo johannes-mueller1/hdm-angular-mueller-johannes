@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListItemComponent } from './private/boards-list/board-item/list-item/list-item.component';
 import { ChartsComponent } from './private/charts/charts.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import { BarchartComponent } from './private/charts/barchart/barchart.component';
+import { RadarchartComponent } from './private/charts/radarchart/radarchart.component';
 
 
 
@@ -36,7 +38,9 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
     BoardItemComponent,
     MessagesComponent,
     ListItemComponent,
-    ChartsComponent
+    ChartsComponent,
+    BarchartComponent,
+    RadarchartComponent
   ],
   imports: [
     BrowserModule,

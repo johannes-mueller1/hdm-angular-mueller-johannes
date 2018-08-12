@@ -20,8 +20,12 @@ export class ChartsComponent implements OnInit {
   boardSelect: string;
   me: User;
   boardUsers: Array<string>;
-  UsersActionsCount: number;
-  percentageOfActions: number;
+  UsersActionsCounts: Array<number>;
+  percentageOfActions: Array<number>;
+  barChartDatasets: Array<any>;
+  TypeActionsCounts: Array<number>;
+  TypePercantageOfActions: Array<number>;
+  radarChartDatasets: Array<any>;
 
   constructor(private api: TrelloApiService) { }
 
@@ -51,43 +55,7 @@ export class ChartsComponent implements OnInit {
       this.api.getMe().subscribe((data: User) => this.me = { ...data });
   }
 
-    public chartType = 'line';
-
-    public chartDatasets: Array<any> = [
-        {data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset'},
-        {data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset'}
-    ];
-
-    public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-
-    public chartColors: Array<any> = [
-        {
-            backgroundColor: 'rgba(220,220,220,0.2)',
-            borderColor: 'rgba(220,220,220,1)',
-            borderWidth: 2,
-            pointBackgroundColor: 'rgba(220,220,220,1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(220,220,220,1)'
-        },
-        {
-            backgroundColor: 'rgba(151,187,205,0.2)',
-            borderColor: 'rgba(151,187,205,1)',
-            borderWidth: 2,
-            pointBackgroundColor: 'rgba(151,187,205,1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(151,187,205,1)'
-        }
-    ];
-
-    public chartOptions: any = {
-        responsive: true
-    };
-    public chartClicked(e: any): void { }
-    public chartHovered(e: any): void { }
-
-    getBoardActions(board_id: string) {
+    onChange(board_id: string) {
         if (board_id !== 'Select a Board') {
             console.log(board_id);
             console.log('hello');
@@ -95,18 +63,41 @@ export class ChartsComponent implements OnInit {
                 this.board = result;
                 this.api.getActions(this.board).subscribe((result_action: Array<Action>) => {
                     this.boardActions = result_action;
-                    let TempUsersActionCount = 0;
-                    for (const action of this.boardActions) {
-                        if (action.memberCreator.username === this.me.username) {
-                            TempUsersActionCount++;
-                        }
-                    }
-                    this.UsersActionsCount = TempUsersActionCount;
-                    console.log(this.UsersActionsCount);
-                    this.percentageOfActions = (this.UsersActionsCount / this.boardActions.length) * 100;
-                    console.log(this.percentageOfActions);
                     this.getUsersOfBoard();
+                    this.UsersActionsCounts = new Array<number>();
+                    this.percentageOfActions = new Array<number>();
+                    for (const user of this.boardUsers) {
+                        let TempUsersActionCount = 0;
+                        for (const action of this.boardActions) {
+                            if (action.memberCreator.username === user) {
+                                TempUsersActionCount++;
+                            }
+                        }
+                        this.UsersActionsCounts.push(TempUsersActionCount);
+                        this.percentageOfActions.push((TempUsersActionCount / this.boardActions.length) * 100);
+                    }
+                    this.barChartDatasets = [
+                        {data: this.UsersActionsCounts, label: 'count'},
+                        {data: this.percentageOfActions, label: 'percentage'}
+                    ];
 
+                    this.TypeActionsCounts = new Array<number>();
+                    this.TypePercantageOfActions = new Array<number>();
+
+                    for (const type of this.types) {
+                        let TempTypeActionCount = 0;
+                        for (const action of this.boardActions) {
+                            if (action.type === type) {
+                                TempTypeActionCount++;
+                            }
+                        }
+                        this.TypeActionsCounts.push(TempTypeActionCount);
+                        this.TypePercantageOfActions.push((TempTypeActionCount / this.boardActions.length) * 100);
+                    }
+                    this.radarChartDatasets = [
+                        {data: this.TypeActionsCounts, label: 'count'},
+                        {data: this.TypePercantageOfActions, label: 'percentage'}
+                    ];
                 });
             });
         }
