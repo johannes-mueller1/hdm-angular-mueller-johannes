@@ -18,6 +18,7 @@ export class TrelloApiService {
         this.handleError = httpErrorHandler.createHandleError('Trello Api Service');
     }
 
+    /** GET the User, who is connected to trello, from trello */
     getMe() {
         return this.http.get<User>('https://api.trello.com/1/members/me/')
             .pipe(
@@ -25,6 +26,7 @@ export class TrelloApiService {
             );
     }
 
+    /** GET the Boards from trello */
     getBoards() {
         return this.http.get<Array<Board>>('https://api.trello.com/1/members/me/boards')
             .pipe(
@@ -32,6 +34,7 @@ export class TrelloApiService {
             );
     }
 
+    /** GET the Lists for specific board from trello */
     getLists(board_id: string) {
         return this.http.get<Array<List>>('https://api.trello.com/1/boards/' + board_id + '/lists')
             .pipe(
@@ -39,6 +42,7 @@ export class TrelloApiService {
             );
     }
 
+    /** GET the Cards for a specific list from trello */
     getCards(list_id: string) {
         return this.http.get<Array<Card>>('https://api.trello.com/1/lists/' + list_id + '/cards')
             .pipe(
@@ -46,6 +50,7 @@ export class TrelloApiService {
             );
     }
 
+    /** GET the Actions for a specific Board from trello */
     getActions(board: Board) {
         return this.http.get<Array<Action>>('https://api.trello.com/1/boards/' + board.id + '/actions')
             .pipe(
@@ -53,6 +58,7 @@ export class TrelloApiService {
             );
     }
 
+    /** GET a specific Board by Board Id */
     getBoard(board_id: string) {
         return this.http.get<Board>('https://api.trello.com/1/boards/' + board_id)
             .pipe(
@@ -60,6 +66,7 @@ export class TrelloApiService {
             );
     }
 
+    /** GET a specific List by List Id */
     getList(list_id: string) {
         return this.http.get<List>('https://api.trello.com/1/lists/' + list_id)
             .pipe(
@@ -67,6 +74,7 @@ export class TrelloApiService {
             );
     }
 
+    /** GET a specific Card by Card Id */
     getCard(card_id: string) {
         return this.http.get<Card>('https://api.trello.com/1/cards/' + card_id)
             .pipe(
@@ -114,6 +122,7 @@ export class TrelloApiService {
             );
     }
 
+    /** POST: add a new card to trello */
     addCard(list: List, newCard: Card): Observable<Card> {
         return this.http.post<Card>('https://api.trello.com/1/cards?idList=' + list.id, newCard)
             .pipe(

@@ -23,6 +23,7 @@ import { ChartsComponent } from './private/charts/charts.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import { BarchartComponent } from './private/charts/barchart/barchart.component';
 import { RadarchartComponent } from './private/charts/radarchart/radarchart.component';
+import { WelcomeComponent } from './private/welcome/welcome.component';
 
 
 
@@ -40,7 +41,8 @@ import { RadarchartComponent } from './private/charts/radarchart/radarchart.comp
     ListItemComponent,
     ChartsComponent,
     BarchartComponent,
-    RadarchartComponent
+    RadarchartComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

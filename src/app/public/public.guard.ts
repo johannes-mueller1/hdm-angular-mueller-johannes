@@ -11,7 +11,7 @@ export class PublicGuard implements CanActivate {
 
     canActivate(): boolean {
         if (this.authService.getToken()) {
-            this.router.navigate(['private']);
+            this.router.navigate(['private', 'welcome']);
             return false;
         } else {
             return true;
